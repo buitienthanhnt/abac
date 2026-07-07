@@ -1,0 +1,1 @@
+export const giabac = 'https://giabac.vn';
