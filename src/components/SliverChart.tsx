@@ -17,6 +17,7 @@ const getApexChartHtml = (chartOptions: any, title = '') => {
   <body style="margin: 0px; padding: 0px">
     <div id="chart"></div>
     <script>
+
     var options = {
           chart: {
             type: 'area', // Chuyển thành dạng đường thay vì area đổ màu
@@ -44,7 +45,7 @@ const getApexChartHtml = (chartOptions: any, title = '') => {
           series: ${JSON.stringify(chartOptions)},
           colors: ['#69cc4e', '#FF4560'], // Màu sắc riêng biệt cho từng đường
           stroke: {
-            width: 3, // Độ dày của đường vẽ
+            width: 2, // Độ dày của đường vẽ
             curve: 'smooth' // Làm mượt đường nối giữa các điểm (hoặc dùng 'straight')
           },
           dataLabels: {
@@ -78,6 +79,18 @@ const getApexChartHtml = (chartOptions: any, title = '') => {
             intersect: false,
             x: {
               format: 'dd/MM HH:mm'
+            },
+            y: {
+              formatter: function (value) {
+                var giaTri = Math.abs(value *1000);
+                var ty = Math.floor(giaTri / 1000000000);
+                var sodu = giaTri - ty * 1000000000;
+                var trieu = Math.floor(sodu / 1000000);
+                sodu = sodu - trieu * 1000000;
+                var nghin = Math.floor(sodu / 1000);
+                sodu = sodu - nghin * 1000;
+                return (ty ? ty + ' tỷ ' : '') + (trieu ? trieu + ' triệu ' : '') + (nghin ? nghin + ' nghìn' : '') + (sodu || '') + ' vnđ' ;
+              }
             }
           },
           legend: {

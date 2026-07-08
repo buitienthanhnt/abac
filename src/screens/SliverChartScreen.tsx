@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import SliverChart from "../components/SliverChart";
 import { useSliverChartData } from "../hook/useSliverData";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { formatCurrency } from "../until/formatApexChartData";
 
 const SliverChartScreen = () => {
   const [type, setType] = useState<'L' | 'C' | 'KG'>('L');
@@ -37,9 +38,9 @@ const SliverChartScreen = () => {
     </View>
 
     {onDayData && <View style={styles.economicType}>
-      <Text style={[styles.economicTitlte, { color: 'red' }]}>Giá mua vào: {economicData?.buyPrice} nghìn vnđ/{type === 'L' ? 'Lượng' : type === 'C' ? 'Chị' : 'Kilogram'}</Text>
-      <Text style={[styles.economicTitlte, { color: 'green' }]}>Giá bán ra: {economicData?.sellPrice} nghìn vnđ/{type === 'L' ? 'Lượng' : type === 'C' ? 'Chị' : 'Kilogram'}</Text>
-      <Text style={styles.economicTitlte}>Chênh lệch: {economicData?.profit} nghìn vnđ/{type === 'L' ? 'Lượng' : type === 'C' ? 'Chị' : 'Kilogram'}</Text>
+      <Text style={[styles.economicTitlte, { color: 'red' }]}>Giá mua vào: {formatCurrency((economicData?.buyPrice || 0) * 1000, `vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'}`)} </Text>
+      <Text style={[styles.economicTitlte, { color: 'green' }]}>Giá bán ra: {formatCurrency((economicData?.sellPrice || 0) * 1000, `vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'}`)}</Text>
+      <Text style={styles.economicTitlte}>Chênh lệch: {formatCurrency((economicData?.profit || 0) * 1000 || 0, `vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'}`)}</Text>
     </View>}
     <SliverChart
       chartData={onDayData}
