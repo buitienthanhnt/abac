@@ -14,5 +14,18 @@ export const fetchSliverChartData = async (days: number, type = 'L') => {
   } catch (error) {
     console.error(error);
   }
+}
 
+export const fetchSliverPercentData = async (days: number) => {
+  try {
+    const response = await axios.get(`${giabac}/SilverInfo/GetPricePercentFromSQLPartial`, {
+      params: {
+        days: days,
+      }
+    });
+    // console.log('===>', response);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 }

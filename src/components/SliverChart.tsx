@@ -127,7 +127,7 @@ export default function SliverChart({ chartData, chartTitle }: { chartData: any,
     }
   };
 
-  if (!chartData) {
+  if (!chartData || chartData.Dates === undefined || chartData.Dates.length === 0) {
     return null;
   }
 

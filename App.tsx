@@ -40,7 +40,7 @@ function AppContent() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 10, //50
+    paddingTop: 4, //50
   },
 });
 
