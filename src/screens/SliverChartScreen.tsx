@@ -17,7 +17,7 @@ const SliverChartScreen = () => {
 
 
   const economicData = useMemo(() => {
-    if (!onDayData) {
+    if (!onDayData.Dates) {
       return null;
     }
     const sellPrice = Math.round(onDayData.LastSellPrices[onDayData.LastSellPrices.length - 1] / 1000);
