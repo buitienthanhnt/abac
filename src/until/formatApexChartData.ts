@@ -12,10 +12,10 @@ export const formatApexChartData = (data: { Type: string, Dates: string[], LastB
       },
     ];
   }
-  // let
+  // Lưu ý là chữ: "Z" cần được viết hoa nếu không nó sẽ trả về NaN
   // return Dates.map((date, index) => [new Date(date + 'z').getTime(), LastBuyPrices[index]/1000]);
-  const sellData = Dates.map((date, index) => [new Date(date).getTime(), LastSellPrices[index] / 1000]);
-  const buyData = Dates.map((date, index) => [new Date(date).getTime(), LastBuyPrices[index] / 1000]);
+  const sellData = Dates.map((date, index) => [new Date( !date.includes('T') ? date : date + 'Z').getTime(), LastSellPrices[index] / 1000]);
+  const buyData = Dates.map((date, index) => [new Date(!date.includes('T') ? date : date + 'Z').getTime(), LastBuyPrices[index] / 1000]);
 
   return [
     {

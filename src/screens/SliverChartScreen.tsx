@@ -17,7 +17,7 @@ const SliverChartScreen = () => {
 
 
   const economicData = useMemo(() => {
-    if (!onDayData.Dates) {
+    if (!onDayData || !onDayData.Dates) {
       return null;
     }
     const sellPrice = Math.round(onDayData.LastSellPrices[onDayData.LastSellPrices.length - 1] / 1000);
@@ -152,4 +152,4 @@ const getStyleByRegex = (html: string, className: string) => {
 export default SliverChartScreen;
 
 // https://giabac.vn/SilverInfo/FilterData lasy gia mua vao, ban ra
-// https://giabac.vn/SilverInfo/GetPricePercentFromSQLPartial?days=7 lay bien dong tang giam 
+// https://giabac.vn/SilverInfo/GetPricePercentFromSQLPartial?days=7 lay bien dong tang giam
