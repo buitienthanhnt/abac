@@ -1,7 +1,7 @@
 import React, { useRef, } from 'react';
-import { StyleSheet, View, } from 'react-native';
+import {StyleSheet, Text, View,} from 'react-native';
 import { WebView } from 'react-native-webview';
-import { formatApexChartData } from '../until/formatApexChartData';
+import {formatApexChartData, formatCurrency} from '../until/formatApexChartData';
 
 const getApexChartHtml = (chartOptions: any, title = '') => {
 
@@ -108,13 +108,11 @@ const getApexChartHtml = (chartOptions: any, title = '') => {
 };
 
 export default function SliverChart({ chartData, chartTitle }: { chartData: any, chartTitle: string }) {
-
   const webViewRef = useRef(null);
 
   // Hàm tạo dữ liệu ngẫu nhiên để test tính năng cập nhật động
   const updateChartData = () => {
     const newData = Array.from({ length: 9 }, () => Math.floor(Math.random() * 100) + 20);
-
     const message = {
       type: 'UPDATE_DATA',
       data: [{ name: 'Doanh thu', data: newData }]
@@ -133,6 +131,27 @@ export default function SliverChart({ chartData, chartTitle }: { chartData: any,
 
   return (
     <View style={styles.container}>
+			<View style={{
+				display: 'flex',
+				padding: 10,
+				margin: 10,
+				rowGap: 10,
+				backgroundColor: '#e8e1f0',
+				borderRadius: 8,
+			}}>
+				{chartData && chartData?.LastSellPrices &&
+					<View>
+						<Text style={styles.maxPriceContent}>Bán ra cao nhất: {formatCurrency(Math.max(...chartData.LastSellPrices))}</Text>
+						<Text style={styles.minPriceContent}>Bán ra thấp nhất : {formatCurrency(Math.min(...chartData.LastSellPrices))}</Text>
+					</View>
+				}
+				{chartData && chartData?.LastBuyPrices &&
+					<View>
+						<Text style={[styles.maxPriceContent, {color: 'red'}]}>Mua vào cao nhất: {formatCurrency(Math.max(...chartData.LastBuyPrices))}</Text>
+						<Text style={styles.minPriceContent}>Mua vào thấp nhất: {formatCurrency(Math.min(...chartData.LastBuyPrices))}</Text>
+					</View>
+				}
+			</View>
       {/* Khu vực chứa Biểu đồ */}
       <View style={styles.chartContainer}>
         {chartData && <WebView
@@ -163,6 +182,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 15,
   },
+	minPriceContent: {
+		fontWeight: 'bold',
+		fontSize: 18,
+		// color: 'red'
+	},
+	maxPriceContent: {
+		fontWeight: 'bold',
+		fontSize: 18,
+		color: 'green',
+	},
   chartContainer: {
     height: 480, // Định hình chiều cao cố định cho vùng chứa biểu đồ
   },
