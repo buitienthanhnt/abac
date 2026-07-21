@@ -5,38 +5,59 @@
  * @format
  */
 
-import {ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View} from 'react-native';
+import { ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
 import {
   SafeAreaProvider,
 } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import SliverChartScreen from './src/screens/SliverChartScreen';
-import { createStaticNavigation } from '@react-navigation/native';
+import { createStaticNavigation, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from '@react-navigation/elements';
 
 const queryClient = new QueryClient();
 
 function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('App')}>
+        Go to Sliver chart
+      </Button>
     </View>
   );
 }
 
 function AppContent() {
+  const navigation = useNavigation();
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <Button onPress={() => navigation.navigate('Home')}>
+        Go to Home
+      </Button>
       <SliverChartScreen />
     </ScrollView>
   );
 }
 
 const RootStack = createNativeStackNavigator({
-  initialRouteName: 'Home',
+  initialRouteName: 'App',
   screens: {
-    Home: HomeScreen,
-    App: AppContent,
+    Home:{
+      screen: HomeScreen,
+      options: {
+        title: 'Trang chủ'
+      }
+    },
+    App: {
+      screen: AppContent,
+      options: {
+        title: 'Biến động giá bạc'
+      }
+    },
   },
 });
 
