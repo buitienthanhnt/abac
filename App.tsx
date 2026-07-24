@@ -61,6 +61,7 @@ function AppContent() {
 // });
 
 const MyTabs = createBottomTabNavigator({
+  initialRouteName: 'App',
   screens: {
     Home: createBottomTabScreen({
       screen: HomeScreen,
@@ -76,6 +77,7 @@ const MyTabs = createBottomTabNavigator({
         headerStyle: {
           backgroundColor: 'transparent', // Làm trong suốt nền header
         },
+        headerShown: false,
         headerShadowVisible: false, // Xóa bỏ đường viền/đổ bóng phía dưới header (v6/v7)
         // headerTintColor: '#fff',     // Đổi màu chữ và nút Back sang màu trắng để nổi bật trên nền tối
       }

@@ -134,7 +134,7 @@ export default function SliverChart({ chartData, chartTitle }: { chartData: any,
 			<View style={{
 				display: 'flex',
 				padding: 10,
-				margin: 10,
+				margin: 5,
 				rowGap: 10,
 				backgroundColor: '#e8e1f0',
 				borderRadius: 8,

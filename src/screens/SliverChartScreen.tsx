@@ -1,13 +1,23 @@
 /* eslint-disable react-native/no-inline-styles */
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import SliverChart from "../components/SliverChart";
 import { useSliverChartData, useSliverPercent } from "../hook/useSliverData";
-import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native";
+import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, useWindowDimensions, View, ViewStyle } from "react-native";
 import { formatCurrency } from "../until/formatApexChartData";
-import PagerView from "react-native-pager-view";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { TabBar, TabView } from 'react-native-tab-view';
+
+const routes = [
+  { key: 'onday', title: 'Hôm nay' },
+  { key: 'sevendays', title: '7 ngày' },
+  { key: 'thirtydays', title: '30 ngày' },
+];
 
 const SliverChartScreen = () => {
+  const layout = useWindowDimensions();
+
   const [type, setType] = useState<'L' | 'C' | 'KG'>('L');
+  const [index, setIndex] = React.useState(0);
 
   const { data: sevenDayData, isLoading, isError, isFetching } = useSliverChartData(7, type);
   const { data: thirtyDayData, } = useSliverChartData(30, type);
@@ -30,7 +40,7 @@ const SliverChartScreen = () => {
     };
   }, [onDayData])
 
-  return <>
+  return <SafeAreaView style={{ flex: 1 }}>
     <View style={styles.viewType}>
       <TouchableOpacity style={[btnStyle(type, 'L')]} onPress={() => setType('L')}>
         <Text style={styles.btnTitle}>L</Text>
@@ -42,49 +52,75 @@ const SliverChartScreen = () => {
         <Text style={styles.btnTitle}>KG</Text>
       </TouchableOpacity>
     </View>
+    <TabView
+      navigationState={{ index, routes }}
+      // Sử dụng renderTabBar để tùy chỉnh màu sắc thanh tab
+      renderTabBar={props => (
+        <TabBar
+          {...props}
+          activeColor="#FFFFFF"    // Màu chữ của Tab đang chọn
+          inactiveColor="black"  // Màu chữ của Tab chưa chọn
+          // 1. Thay đổi màu nền của toàn bộ thanh Tab Bar ở đây
+          style={{ backgroundColor: '#6d74d4ff' }}
+          // 2. (Tùy chọn) Thay đổi màu thanh indicator (thanh gạch chân bên dưới tab hiện tại)
+          indicatorStyle={{ backgroundColor: 'white' }}
+        />
+      )}
 
-    <PagerView style={styles.pagerView} initialPage={0}>
-      <View key="1" style={styles.pageItemStyle}>
-        {onDayData && <View style={styles.economicType}>
-          <Text style={[styles.economicTitlte, { color: 'red' }]}>Giá mua vào: {formatCurrency((economicData?.buyPrice || 0) * 1000, `vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'}`)} </Text>
-          <Text style={[styles.economicTitlte, { color: 'green' }]}>Giá bán ra: {formatCurrency((economicData?.sellPrice || 0) * 1000, `vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'}`)}</Text>
-          <Text style={styles.economicTitlte}>Chênh lệch: {formatCurrency((economicData?.profit || 0) * 1000 || 0, `vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'}`)}</Text>
-        </View>}
-        {sliverPrercent &&
-          <Text style={percentTitleStyle(sliverPrercent)}>
-            {getStyleByRegex(sliverPrercent, 'fs-3') === '#008c72' ? '+' : '-'} {getContentByRegex(sliverPrercent, 'fs-3')}
-          </Text>
-        }
+      renderScene={
+        ({ route }) => {
+          switch (route.key) {
+            case 'onday':
+              return (<View key="1" style={styles.pageItemStyle}>
+                {onDayData && <View style={styles.economicType}>
+                  <Text style={[styles.economicTitlte, { color: 'red' }]}>Giá mua vào: {formatCurrency((economicData?.buyPrice || 0) * 1000, `vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'}`)} </Text>
+                  <Text style={[styles.economicTitlte, { color: 'green' }]}>Giá bán ra: {formatCurrency((economicData?.sellPrice || 0) * 1000, `vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'}`)}</Text>
+                  <Text style={styles.economicTitlte}>Chênh lệch: {formatCurrency((economicData?.profit || 0) * 1000 || 0, `vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'}`)}</Text>
+                </View>}
+                {sliverPrercent &&
+                  <Text style={percentTitleStyle(sliverPrercent)}>
+                    {getStyleByRegex(sliverPrercent, 'fs-3') === '#008c72' ? '+' : '-'} {getContentByRegex(sliverPrercent, 'fs-3')}
+                  </Text>
+                }
 
-        <SliverChart
-          chartData={onDayData}
-          chartTitle={`Biến động giá bạc trong ngày(nghìn vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'})`}
-        />
-      </View>
-      <View key="2" style={styles.pageItemStyle}>
-        {sliverSevenPrercent &&
-          <Text style={percentTitleStyle(sliverSevenPrercent)}>
-            {getStyleByRegex(sliverSevenPrercent, 'fs-3') === '#008c72' ? '+' : '-'} {getContentByRegex(sliverSevenPrercent, 'fs-3')}
-          </Text>
+                <SliverChart
+                  chartData={onDayData}
+                  chartTitle={`Biến động giá bạc trong ngày(nghìn vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'})`}
+                />
+              </View>);
+            case 'sevendays':
+              return <View key="2" style={styles.pageItemStyle}>
+                {sliverSevenPrercent &&
+                  <Text style={percentTitleStyle(sliverSevenPrercent)}>
+                    {getStyleByRegex(sliverSevenPrercent, 'fs-3') === '#008c72' ? '+' : '-'} {getContentByRegex(sliverSevenPrercent, 'fs-3')}
+                  </Text>
+                }
+                <SliverChart
+                  chartData={sevenDayData}
+                  chartTitle={`Biến động giá bạc trong 7 ngày(nghìn vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'})`}
+                />
+              </View>;
+            case 'thirtydays':
+              return (<View key="3" style={styles.pageItemStyle}>
+                {sliverThirtyPrercent &&
+                  <Text style={percentTitleStyle(sliverThirtyPrercent)}>
+                    {getStyleByRegex(sliverThirtyPrercent, 'fs-3') === '#008c72' ? '+' : '-'} {getContentByRegex(sliverThirtyPrercent, 'fs-3')}
+                  </Text>
+                }
+                <SliverChart
+                  chartData={thirtyDayData}
+                  chartTitle={`Biến động giá bạc trong 30 ngày(nghìn vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'})`}
+                />
+              </View>)
+            default:
+              return null;
+          }
         }
-        <SliverChart
-          chartData={sevenDayData}
-          chartTitle={`Biến động giá bạc trong 7 ngày(nghìn vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'})`}
-        />
-      </View>
-      <View key="3" style={styles.pageItemStyle}>
-        {sliverThirtyPrercent &&
-          <Text style={percentTitleStyle(sliverThirtyPrercent)}>
-            {getStyleByRegex(sliverThirtyPrercent, 'fs-3') === '#008c72' ? '+' : '-'} {getContentByRegex(sliverThirtyPrercent, 'fs-3')}
-          </Text>
-        }
-        <SliverChart
-          chartData={thirtyDayData}
-          chartTitle={`Biến động giá bạc trong 30 ngày(nghìn vnđ/${type === 'L' ? 'Lượng' : type === 'C' ? 'Chỉ' : 'Kilogram'})`}
-        />
-      </View>
-    </PagerView>
-  </>
+      }
+      onIndexChange={setIndex}
+      initialLayout={{ width: layout.width }}
+    />
+  </SafeAreaView>
 }
 
 const styles = StyleSheet.create({
@@ -116,7 +152,7 @@ const styles = StyleSheet.create({
   },
   pagerView: {
     flex: 1,
-    // backgroundColor: '#3288c2ff',
+    // backgroundColor: '#7ca6d6ff',
     alignItems: 'center',
     justifyContent: 'center',
   },

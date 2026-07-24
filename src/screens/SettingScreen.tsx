@@ -1,10 +1,40 @@
-import { FunctionComponent } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { FunctionComponent } from 'react';
+import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { TabView, SceneMap } from 'react-native-tab-view';
+
+const FirstRoute = () => (
+  <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
+);
+
+const SecondRoute = () => (
+  <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+);
+
+const renderScene = SceneMap({
+  first: FirstRoute,
+  second: SecondRoute,
+});
+
+const routes = [
+  { key: 'first', title: 'First' },
+  { key: 'second', title: 'Second' },
+];
 
 export const SettingScreen: FunctionComponent<any> = () => {
   const insets = useSafeAreaInsets();
+   const layout = useWindowDimensions();
+  const [index, setIndex] = React.useState(0);
+
+  return (
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={{ width: layout.width }}
+    />
+  );
 
   return (
     <SafeAreaProvider style={{ flex: 1, backgroundColor: '#7ca6d6ff' }} >
