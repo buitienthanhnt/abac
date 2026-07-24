@@ -1,8 +1,11 @@
-import React, { FunctionComponent } from 'react';
-import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Button } from '@react-navigation/elements';
+import React, { FunctionComponent, useCallback } from 'react';
+import { Alert, Linking, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import PagerView from 'react-native-pager-view';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TabView, SceneMap } from 'react-native-tab-view';
+
+const appUrl = 'https://play.google.com/store/apps/details?id=com.abac';
 
 const FirstRoute = () => (
   <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
@@ -22,32 +25,38 @@ const routes = [
   { key: 'second', title: 'Second' },
 ];
 
+type OpenURLButtonProps = {
+  url: string;
+  children: string;
+};
+
 export const SettingScreen: FunctionComponent<any> = () => {
   const insets = useSafeAreaInsets();
-   const layout = useWindowDimensions();
+  const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
 
-  return (
-    <TabView
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      initialLayout={{ width: layout.width }}
-    />
-  );
+  // return (
+  //   <TabView
+  //     navigationState={{ index, routes }}
+  //     renderScene={renderScene}
+  //     onIndexChange={setIndex}
+  //     initialLayout={{ width: layout.width }}
+  //   />
+  // );
+
+  const handlePress = useCallback(async (url: string) => {
+    const activeUrl = await Linking.canOpenURL(url);
+    if (activeUrl) {
+      Linking.openURL(url);
+    }
+  }, [])
 
   return (
-    <SafeAreaProvider style={{ flex: 1, backgroundColor: '#7ca6d6ff' }} >
-      {/* <View style={{ height: insets.top, backgroundColor: 'rgba(20, 20, 218, 0.33)'}}></View> */}
-      {/* <PagerView style={styles.pagerView} initialPage={0}>
-        <View key="1" style={styles.pageItemStyle}>
-          <Text>First page</Text>
-        </View>
-        <View key="2" style={styles.pageItemStyle}>
-          <Text>Second page</Text>
-        </View>
-      </PagerView> */}
-    </SafeAreaProvider>
+    <SafeAreaView style={{ flex: 1, padding: 8, justifyContent: 'flex-end', paddingBottom: insets.bottom }} >
+      <View>
+        <Button variant="filled" onPress={() => handlePress(appUrl)}>Cập nhật</Button>
+      </View>
+    </SafeAreaView>
   )
 }
 
@@ -56,7 +65,7 @@ export default SettingScreen;
 const styles = StyleSheet.create({
   pagerView: {
     flex: 1,
-    backgroundColor: '#3288c2ff',
+    // backgroundColor: '#3288c2ff',
     alignItems: 'center',
     justifyContent: 'center',
   },

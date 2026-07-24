@@ -119,6 +119,7 @@ const MyTabs = createBottomTabNavigator({
       },
       tabBarActiveTintColor: '#1E90FF',   // Màu icon khi đang chọn
       tabBarInactiveTintColor: 'black',    // Màu icon khi không chọn
+      tabBarShowLabel: false,             
     }
   }
 });
