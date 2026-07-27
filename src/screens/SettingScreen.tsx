@@ -1,8 +1,8 @@
 import { Button } from '@react-navigation/elements';
 import React, { FunctionComponent, useCallback } from 'react';
-import { Alert, Linking, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import PagerView from 'react-native-pager-view';
-import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Linking, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
 const appUrl = 'https://play.google.com/store/apps/details?id=com.abac';
@@ -31,6 +31,8 @@ type OpenURLButtonProps = {
 };
 
 export const SettingScreen: FunctionComponent<any> = () => {
+  const navigation = useNavigation();
+
   const insets = useSafeAreaInsets();
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
@@ -52,11 +54,12 @@ export const SettingScreen: FunctionComponent<any> = () => {
   }, [])
 
   return (
-    <SafeAreaView style={{ flex: 1, padding: 8, justifyContent: 'flex-end', paddingBottom: insets.bottom }} >
-      <View>
-        <Button variant="filled" onPress={() => handlePress(appUrl)}>Cập nhật</Button>
-      </View>
-    </SafeAreaView>
+    <View style={{ flex: 1, padding: 4, rowGap: 5 }}>
+      <Button variant="filled" onPress={() => handlePress(appUrl)}>Cập nhật</Button>
+      <Button variant="filled" onPress={() => {
+        navigation.navigate('DashboardPage');
+      }}>Active history</Button>
+    </View>
   )
 }
 

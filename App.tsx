@@ -21,6 +21,7 @@ import {
 // Sử dụng bộ icon Ionicons làm ví dụ
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SettingScreen from './src/screens/SettingScreen';
+import DashboardScreen from './src/screens/DashboardScreen';
 
 const queryClient = new QueryClient();
 
@@ -42,23 +43,23 @@ function AppContent() {
   return (<SliverChartScreen />);
 }
 
-// const RootStack = createNativeStackNavigator({
-//   initialRouteName: 'App',
-//   screens: {
-//     Home: {
-//       screen: HomeScreen,
-//       options: {
-//         title: 'Trang chủ'
-//       }
-//     },
-//     App: {
-//       screen: AppContent,
-//       options: {
-//         title: 'Biến động giá bạc'
-//       }
-//     },
-//   },
-// });
+const SettingStack = createNativeStackNavigator({
+  initialRouteName: 'SettingPage',
+  screens: {
+    SettingPage: {
+      screen: SettingScreen,
+      options: {
+        title: 'Cài đặt'
+      }
+    },
+    DashboardPage: {
+      screen: DashboardScreen,
+      options: {
+        title: 'Hoạt động'
+      }
+    },
+  },
+});
 
 const MyTabs = createBottomTabNavigator({
   initialRouteName: 'App',
@@ -71,7 +72,7 @@ const MyTabs = createBottomTabNavigator({
       }
     }),
     App: createBottomTabScreen({
-      screen: AppContent,
+      screen: SliverChartScreen,
       options: {
         // headerTransparent: true,
         headerStyle: {
@@ -83,12 +84,13 @@ const MyTabs = createBottomTabNavigator({
       }
     }),
     Setting: createBottomTabScreen({
-      screen: SettingScreen,
+      screen: SettingStack,
       options: {
-        title: 'Cài đặt',
+        // title: 'Cài đặt',
         headerStyle: {
           backgroundColor: 'transparent',
         },
+        headerShown: false,
         headerShadowVisible: false, // Xóa bỏ đường viền/đổ bóng phía dưới header (v6/v7)
         // headerTransparent: true  // Làm trong suốt nền header, cũng như chuyển về là absolute
       }
@@ -119,7 +121,7 @@ const MyTabs = createBottomTabNavigator({
       },
       tabBarActiveTintColor: '#1E90FF',   // Màu icon khi đang chọn
       tabBarInactiveTintColor: 'black',    // Màu icon khi không chọn
-      tabBarShowLabel: false,             
+      tabBarShowLabel: false,
     }
   }
 });

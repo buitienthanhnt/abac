@@ -19,7 +19,7 @@ const SliverChartScreen = () => {
   const [type, setType] = useState<'L' | 'C' | 'KG'>('L');
   const [index, setIndex] = React.useState(0);
 
-  const { data: sevenDayData, isLoading, isError, isFetching } = useSliverChartData(7, type);
+  const { data: sevenDayData } = useSliverChartData(7, type);
   const { data: thirtyDayData, } = useSliverChartData(30, type);
   const { data: onDayData, } = useSliverChartData(1, type);
   const { data: sliverPrercent } = useSliverPercent(1);
