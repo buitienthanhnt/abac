@@ -22,6 +22,7 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SettingScreen from './src/screens/SettingScreen';
 import DashboardScreen from './src/screens/DashboardScreen';
+import ActivityDetailScreen from './src/screens/ActivityDetailScreen';
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,12 @@ const SettingStack = createNativeStackNavigator({
         title: 'Hoạt động'
       }
     },
+    ActivityDetailPage: {
+      screen: ActivityDetailScreen,
+      options: {
+        title: 'Chi tiết hoạt động'
+      }
+    }
   },
 });
 
