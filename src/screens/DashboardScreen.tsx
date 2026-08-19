@@ -103,7 +103,12 @@ const DashboardScreen = () => {
   );
 }
 
-const CaculateItem = ({ item, removeActivity, index }: any) => {
+interface ItemProps {
+  item: ActivityType,
+  removeActivity: (index: number) => void,
+  index: number,
+}
+const CaculateItem = ({ item, removeActivity, index }: ItemProps) => {
   const caculatePrice = item.price - nowPrice.sellPrice;
   const navigation = useNavigation();
 
@@ -117,7 +122,7 @@ const CaculateItem = ({ item, removeActivity, index }: any) => {
     <TouchableOpacity style={style.activityItem} onPress={openDetail}>
       <Text style={style.itemLabel}>{item.label}</Text>
       <View>
-        <Text style={style.itemPrice}>{item.price}</Text>
+        <Text style={style.itemPrice}>{item.price} * {item.qty}</Text>
         <Text style={caculatePriceStyle(caculatePrice)}>{caculatePrice > 0 ? '+' : ''} {caculatePrice}</Text>
       </View>
       <TouchableOpacity onPress={() => removeActivity(index)}>

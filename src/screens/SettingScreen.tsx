@@ -59,6 +59,10 @@ export const SettingScreen: FunctionComponent<any> = () => {
       <Button variant="filled" onPress={() => {
         navigation.navigate('DashboardPage');
       }}>Active history</Button>
+
+      <Button variant="filled" onPress={() => {
+        navigation.navigate('StockPage');
+      }}>Stock page</Button>
     </View>
   )
 }

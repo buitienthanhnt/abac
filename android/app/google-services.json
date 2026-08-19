@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "481577306956",
+    "project_id": "abac-d53bb",
+    "storage_bucket": "abac-d53bb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481577306956:android:c696c7d825aed60a6a9de9",
+        "android_client_info": {
+          "package_name": "com.abac"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZmhf4uejAAGQvaur_LYIc_QCKiKywdlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,38 @@
+import { TouchableOpacity, useWindowDimensions, } from 'react-native';
+import { screen } from '../../data/stockData';
+import { BlockType, } from '../../types/Block';
+
+type Props = {
+  block: BlockType;
+  selected: 0 | 1 | 2;
+  onFocus: (key: string) => void;
+  initScreen: { width: number, height: number } | null;
+
+}
+const StockItem = ({ block, selected, onFocus, initScreen }: Props) => {
+  const { width, height } = useWindowDimensions();
+
+  if (!initScreen) {
+    return null;
+  }
+
+  const xScale = width / initScreen.width;
+  const yScale = height / initScreen.height;
+
+  return (
+    <TouchableOpacity style={{
+      position: 'absolute',
+      left: block.x * xScale,
+      top: block.y * yScale,
+      width: block.width * xScale,
+      height: block.height * yScale,
+      backgroundColor: block.type === 'block' ? (selected === 1 ? '#76d5a9' : selected === 2 ? '#b6a5b5ff' : block?.style?.color) : undefined,
+      // borderWidth: block.type === 'area' ? 1 : 0,
+    }}
+      onLongPress={() => onFocus(block.key)}
+    >
+    </TouchableOpacity>
+  )
+}
+
+export default StockItem;
