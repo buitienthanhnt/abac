@@ -5,15 +5,11 @@
  * @format
  */
 
-import { ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-} from 'react-native-safe-area-context';
+import { StyleSheet, useColorScheme, View } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import SliverChartScreen from './src/screens/SliverChartScreen';
 import { createStaticNavigation, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button } from '@react-navigation/elements';
 import {
   createBottomTabNavigator,
   createBottomTabScreen,

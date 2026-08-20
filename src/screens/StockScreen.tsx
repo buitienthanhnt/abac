@@ -1,9 +1,11 @@
 import { FunctionComponent, useCallback, useEffect, useMemo, useState } from "react";
-import { Button, Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, useWindowDimensions, View } from "react-native";
-// import { blockList, screen } from '../data/stockData';
+import { Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, useWindowDimensions, View } from "react-native";
 import StockItem from "../components/stock/StockItem";
 import { getDatabase, ref, get } from '@react-native-firebase/database';
 import { BlockType } from "../types/Block";
+//list icons:  https://oblador.github.io/react-native-vector-icons/
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Orientation from 'react-native-orientation-locker';
 
 const StockScreen: FunctionComponent<any> = () => {
   const [blockList, setBlockList] = useState<BlockType[]>([]);
@@ -32,7 +34,7 @@ const StockScreen: FunctionComponent<any> = () => {
     }
 
     const result = blockList.filter(block =>
-      block.items.some(item => item.item_model.toLowerCase().includes(search?.toLowerCase()))
+      block.items?.some(item => item.item_model.toLowerCase().includes(search?.toLowerCase()))
     );
     return result.map(block => {
       return block.key;
@@ -46,7 +48,22 @@ const StockScreen: FunctionComponent<any> = () => {
     initScreen();
   }, [initBlockList, initScreen])
 
+  useEffect(() => {
+    // Khóa màn hình ngang khi mở ứng dụng/màn hình này
+    Orientation.lockToLandscapeRight();
 
+    // Lắng nghe sự kiện nếu người dùng xoay thiết bị (khi không khóa)
+    const onOrientationChange = (orientation) => {
+      console.log("Hướng màn hình hiện tại:", orientation);
+    };
+    Orientation.addOrientationListener(onOrientationChange);
+
+    return () => {
+      // Hủy lắng nghe và mở khóa khi rời màn hình
+      Orientation.removeOrientationListener(onOrientationChange);
+      Orientation.unlockAllOrientations();
+    };
+  }, []);
 
   if (blockList.length === 0) {
     return null;
@@ -62,32 +79,45 @@ const StockScreen: FunctionComponent<any> = () => {
         {forcusBlock && <View style={{
           position: 'absolute',
           display: 'flex',
-          top: 20,
+          top: 10,
           left: 10,
           zIndex: 999,
         }}>
-          <TouchableOpacity onPress={() => setForcus('')} title="Xóa" style={{
-            padding: 4,
+          <TouchableOpacity onPress={() => setForcus('')} style={{
+            // alignItems: 'flex-end',
             display: 'flex',
-            alignItems: 'center',
-            borderWidth: 1,
-            borderRadius: 8,
-            borderColor: '#fff',
-            width: '100%'
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            padding: 6,
           }}>
             <Text style={{
-              fontSize: 14,
+              fontSize: 15,
               fontWeight: 'bold',
-              color: 'red',
-              flex: 1,
-            }}>Xóa</Text>
+              color: '#9a39c7ff',
+            }}>Vị trí đang chọn: {forcusBlock.name}</Text>
+            <Ionicons name="close-circle" size={24} color="white" />
           </TouchableOpacity>
-          {forcusBlock.items.map((item, index) => {
-            return <Text key={index} style={{
-              color: '#fff',
-              fontWeight: 'bold',
-              fontSize: 16,
-            }}>{item.item_model}</Text>
+          {forcusBlock.items?.map((item, index) => {
+            return <View key={index}
+              style={{
+                marginBottom: 2,
+                borderWidth: 1,
+                borderColor: 'black',
+                borderRadius: 4,
+                paddingHorizontal: 4,
+                paddingVertical: 2,
+                display: 'flex',
+                flexDirection: 'row',
+                gap: 5,
+                alignItems: 'baseline'
+              }}>
+              <Text style={{
+                color: 'white',
+                fontWeight: 'bold',
+                fontSize: 16,
+              }}>{item.item_model}</Text>
+              {item.item_desc && <Text style={{ color: '#17d641ff', fontSize: 12, fontWeight: 'semibold' }} >{`(${item.item_desc})`}</Text>}
+            </View>
           })}
         </View>
         }
@@ -101,30 +131,32 @@ const StockScreen: FunctionComponent<any> = () => {
         })}
         <View style={{
           position: 'absolute',
-          top: 20,
-          right: 10,
+          bottom: 40,
+          right: 30,
+          width: 170,
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
           gap: 5,
         }}>
           {(search.length > 2) && <TouchableOpacity onPress={() => setSearch('')}>
-            <Text style={{
-              fontSize: 14,
-              fontWeight: 'bold',
-              color: 'red',
-            }}>Xóa</Text>
+            <Ionicons name="close-circle" size={24} color="white" />
           </TouchableOpacity>
           }
-          <TextInput value={search} onChangeText={(value) => setSearch(value)} style={{
-            borderWidth: 1,
-            borderRadius: 8,
-            color: '#fff',
-            fontWeight: 'semibold',
-            fontSize: 16,
-            width: 126,
-            borderColor: '#fff',
-          }}
+          <TextInput
+            value={search}
+            onChangeText={(value) => setSearch(value)}
+            placeholder="tìm kiếm"
+            placeholderTextColor={'white'}
+            style={{
+              borderWidth: 1,
+              borderRadius: 8,
+              color: '#fff',
+              fontWeight: 'semibold',
+              fontSize: 16,
+              width: 132,
+              borderColor: '#fff',
+            }}
           >
           </TextInput>
         </View>

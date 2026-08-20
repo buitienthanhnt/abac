@@ -1,9 +1,9 @@
 import { Button } from '@react-navigation/elements';
 import React, { FunctionComponent, useCallback } from 'react';
-import { Linking, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Linking, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import { TabView, SceneMap } from 'react-native-tab-view';
+import { SceneMap } from 'react-native-tab-view';
 
 const appUrl = 'https://play.google.com/store/apps/details?id=com.abac';
 
@@ -54,15 +54,29 @@ export const SettingScreen: FunctionComponent<any> = () => {
   }, [])
 
   return (
-    <View style={{ flex: 1, padding: 4, rowGap: 5 }}>
-      <Button variant="filled" onPress={() => handlePress(appUrl)}>Cập nhật</Button>
-      <Button variant="filled" onPress={() => {
+    <View style={{ flex: 1, padding: 4, paddingBottom: 50, rowGap: 5, justifyContent: 'space-between' }}>
+      {/* <Button variant="filled" onPress={() => {
         navigation.navigate('DashboardPage');
-      }}>Active history</Button>
+      }}>Active history</Button> */}
 
-      <Button variant="filled" onPress={() => {
+      <TouchableOpacity style={{
+        backgroundColor: '#8a6eccff',
+        padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 8,
+        // borderColor: '#c28832ff',
+        // borderWidth: 1,
+      }} onPress={() => {
         navigation.navigate('StockPage');
-      }}>Stock page</Button>
+      }}>
+        <Text style={{
+          fontWeight: 'bold',
+          color: 'white',
+          fontSize: 18
+        }}>Stock manage</Text>
+      </TouchableOpacity>
+      <Button variant="filled" onPress={() => handlePress(appUrl)}>Cập nhật</Button>
     </View>
   )
 }
