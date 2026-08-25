@@ -390,26 +390,7 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": [
-      {
-        "id": 1,
-        "block_id": 23,
-        "item_model": "demo",
-        "item_type": "text",
-        "item_desc": null,
-        "created_at": null,
-        "updated_at": null
-      },
-      {
-        "id": 2,
-        "block_id": 23,
-        "item_model": "etst new nodel",
-        "item_type": "text",
-        "item_desc": "day la thong tin mo ta",
-        "created_at": null,
-        "updated_at": null
-      }
-    ]
+    "items": []
   },
   {
     "id": 24,
@@ -443,7 +424,26 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 52,
+        "block_id": 25,
+        "item_model": "s7up-11mowed",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 53,
+        "block_id": 25,
+        "item_model": "k7fp-5hote",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 26,
@@ -462,9 +462,18 @@ export const blockList = [
     "updated_at": null,
     "items": [
       {
-        "id": 8,
+        "id": 50,
         "block_id": 26,
-        "item_model": "mr100",
+        "item_model": "k7fp-8von",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 51,
+        "block_id": 26,
+        "item_model": "k7fp-3hote",
         "item_type": "text",
         "item_desc": null,
         "created_at": null,
@@ -489,11 +498,20 @@ export const blockList = [
     "updated_at": null,
     "items": [
       {
-        "id": 3,
+        "id": 40,
         "block_id": 27,
         "item_model": "10mowed",
         "item_type": "text",
-        "item_desc": "lay phia sau truoc",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 41,
+        "block_id": 27,
+        "item_model": "s3ep-5mowe",
+        "item_type": "text",
+        "item_desc": null,
         "created_at": null,
         "updated_at": null
       }
@@ -514,14 +532,42 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 21,
+        "block_id": 28,
+        "item_model": "s3ep-5mowe",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 42,
+        "block_id": 28,
+        "item_model": "n110w",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 43,
+        "block_id": 28,
+        "item_model": "n110",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 29,
     "name": "67",
     "key": "block_1783769744216",
-    "x": 941,
-    "y": 360,
+    "x": 940.99290812592,
+    "y": 401.73913043478,
     "width": 59,
     "height": 99,
     "style": {
@@ -531,14 +577,33 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 44,
+        "block_id": 29,
+        "item_model": "k7fp-3howe",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 45,
+        "block_id": 29,
+        "item_model": "k2mp-3h1we",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 30,
     "name": "68",
     "key": "block_1783769768319",
-    "x": 999,
-    "y": 362,
+    "x": 998.98270497804,
+    "y": 381.07453416149,
     "width": 65,
     "height": 100,
     "style": {
@@ -548,7 +613,26 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 46,
+        "block_id": 30,
+        "item_model": "a52p-pro",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 47,
+        "block_id": 30,
+        "item_model": "a52p",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 31,
@@ -565,7 +649,26 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 12,
+        "block_id": 31,
+        "item_model": "k7fp-5howe",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 49,
+        "block_id": 31,
+        "item_model": "b7ed-5motea",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 32,
@@ -582,7 +685,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 19,
+        "block_id": 32,
+        "item_model": "s2xep-10mos",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 33,
@@ -601,9 +714,18 @@ export const blockList = [
     "updated_at": null,
     "items": [
       {
-        "id": 4,
+        "id": 22,
         "block_id": 33,
-        "item_model": "3mowez",
+        "item_model": "s3ep-3mowe",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 76,
+        "block_id": 33,
+        "item_model": "s2xep-6mos",
         "item_type": "text",
         "item_desc": null,
         "created_at": null,
@@ -660,7 +782,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 24,
+        "block_id": 36,
+        "item_model": "xvr5116hs-5m-i3/t",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 37,
@@ -762,7 +894,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 94,
+        "block_id": 42,
+        "item_model": "dh-ipc-hdbw1239e1-a-il",
+        "item_type": "text",
+        "item_desc": "(không có đuôi vn)thùng có băng dính xanh nép sát giá",
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 43,
@@ -830,7 +972,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 67,
+        "block_id": 46,
+        "item_model": "1339dtk1-sw-pv",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 47,
@@ -864,7 +1016,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 88,
+        "block_id": 48,
+        "item_model": "dh-hac-hfw1500thp-il-a",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 49,
@@ -932,7 +1094,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 81,
+        "block_id": 52,
+        "item_model": "dh-cs4010-8et2gt-110",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 53,
@@ -983,7 +1155,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 4,
+        "block_id": 55,
+        "item_model": "tl-sg1016d",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 56,
@@ -1034,7 +1216,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 11,
+        "block_id": 58,
+        "item_model": "x60(1-pack)",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 59,
@@ -1051,7 +1243,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 75,
+        "block_id": 59,
+        "item_model": "s7xp-8u0wed",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 60,
@@ -1068,7 +1270,26 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 28,
+        "block_id": 60,
+        "item_model": "3mo",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 29,
+        "block_id": 60,
+        "item_model": "ps8d-5vo",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 61,
@@ -1085,7 +1306,35 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 30,
+        "block_id": 61,
+        "item_model": "3towe",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 31,
+        "block_id": 61,
+        "item_model": "ps8ep-3vo",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 32,
+        "block_id": 61,
+        "item_model": "5mowez",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 62,
@@ -1104,9 +1353,27 @@ export const blockList = [
     "updated_at": null,
     "items": [
       {
-        "id": 9,
+        "id": 10,
         "block_id": 62,
-        "item_model": "5mowez",
+        "item_model": "f52fp",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 33,
+        "block_id": 62,
+        "item_model": "ps3ep-3mo",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 35,
+        "block_id": 62,
+        "item_model": "f32p",
         "item_type": "text",
         "item_desc": null,
         "created_at": null,
@@ -1248,7 +1515,26 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 8,
+        "block_id": 70,
+        "item_model": "tl-mc112cs",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 9,
+        "block_id": 70,
+        "item_model": "tl-mc111cs",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 71,
@@ -1350,7 +1636,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 61,
+        "block_id": 76,
+        "item_model": "c216",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 77,
@@ -1452,7 +1748,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 96,
+        "block_id": 82,
+        "item_model": "tl-mr400",
+        "item_type": "text",
+        "item_desc": "tầng dưới",
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 83,
@@ -1469,7 +1775,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 16,
+        "block_id": 83,
+        "item_model": "mb112-4g",
+        "item_type": "text",
+        "item_desc": "tầng dưới của giá",
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 84,
@@ -1486,7 +1802,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 62,
+        "block_id": 84,
+        "item_model": "tx20u",
+        "item_type": "text",
+        "item_desc": "tầng trên của giá, phía bên trong",
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 85,
@@ -1503,7 +1829,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 5,
+        "block_id": 85,
+        "item_model": "ls1024g",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 86,
@@ -1520,7 +1856,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 7,
+        "block_id": 86,
+        "item_model": "tl-sg1024d",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 87,
@@ -1571,7 +1917,26 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 59,
+        "block_id": 89,
+        "item_model": "zkt-mb10-vl",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 60,
+        "block_id": 89,
+        "item_model": "c206",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 90,
@@ -1605,7 +1970,26 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 95,
+        "block_id": 91,
+        "item_model": "t2ub nano",
+        "item_type": "text",
+        "item_desc": "tầng dưới phía bên trong",
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 97,
+        "block_id": 91,
+        "item_model": "t2u plus",
+        "item_type": "text",
+        "item_desc": "tầng dưới, cạnh t2ub nano",
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 92,
@@ -1639,17 +2023,7 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": [
-      {
-        "id": 5,
-        "block_id": 93,
-        "item_model": "eap225",
-        "item_type": "text",
-        "item_desc": null,
-        "created_at": null,
-        "updated_at": null
-      }
-    ]
+    "items": []
   },
   {
     "id": 94,
@@ -1683,7 +2057,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 87,
+        "block_id": 95,
+        "item_model": "dh-ipc-hdbw2249e-s-il",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 96,
@@ -1700,7 +2084,17 @@ export const blockList = [
     "type": "area",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 78,
+        "block_id": 96,
+        "item_model": "tl-mw325r",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 97,
@@ -1768,7 +2162,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 73,
+        "block_id": 100,
+        "item_model": "xvr1b04-i/t-vn",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 101,
@@ -1836,7 +2240,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 63,
+        "block_id": 104,
+        "item_model": "t1e29-a-il",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 105,
@@ -1853,7 +2267,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 80,
+        "block_id": 105,
+        "item_model": "dhi-asi3203e-w",
+        "item_type": "text",
+        "item_desc": "mặt trong",
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 106,
@@ -1870,7 +2294,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 99,
+        "block_id": 106,
+        "item_model": "dh-xvr5116h-4kl-i3",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 107,
@@ -1955,7 +2389,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 23,
+        "block_id": 111,
+        "item_model": "s31fep",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 112,
@@ -1989,7 +2433,26 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 57,
+        "block_id": 113,
+        "item_model": "t1a21p-u-il-a",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 58,
+        "block_id": 113,
+        "item_model": "b1a21p-u-il-a",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 114,
@@ -2006,7 +2469,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 83,
+        "block_id": 114,
+        "item_model": "dh-p5i-pv",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 115,
@@ -2048,8 +2521,8 @@ export const blockList = [
     "key": "block_1785680294774",
     "x": 1167,
     "y": 133,
-    "width": 43,
-    "height": 27,
+    "width": 42.162518301611,
+    "height": 23,
     "style": {
       "color": "#50ccce",
       "zIndex": 117
@@ -2057,7 +2530,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 55,
+        "block_id": 117,
+        "item_model": "hdw2449t-s-pro",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 118,
@@ -2074,7 +2557,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 89,
+        "block_id": 118,
+        "item_model": "dh-p3as-pv",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 119,
@@ -2127,9 +2620,9 @@ export const blockList = [
     "updated_at": null,
     "items": [
       {
-        "id": 11,
+        "id": 86,
         "block_id": 121,
-        "item_model": "cs3006",
+        "item_model": "dh-ipc-hfw2249t-as-il",
         "item_type": "text",
         "item_desc": null,
         "created_at": null,
@@ -2154,9 +2647,9 @@ export const blockList = [
     "updated_at": null,
     "items": [
       {
-        "id": 10,
+        "id": 82,
         "block_id": 122,
-        "item_model": "cs4010",
+        "item_model": "dh-cs4226-24et-240",
         "item_type": "text",
         "item_desc": null,
         "created_at": null,
@@ -2281,7 +2774,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 85,
+        "block_id": 129,
+        "item_model": "nvr5464-ei2",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 130,
@@ -2298,7 +2801,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 68,
+        "block_id": 130,
+        "item_model": "cs4216-16et-135",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 131,
@@ -2315,7 +2828,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 18,
+        "block_id": 131,
+        "item_model": "dh-p3i-pv",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 132,
@@ -2366,7 +2889,26 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 34,
+        "block_id": 134,
+        "item_model": "n118-8aoe",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 36,
+        "block_id": 134,
+        "item_model": "n118w-8aoe",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 135,
@@ -2383,7 +2925,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 17,
+        "block_id": 135,
+        "item_model": "nvr4116hs-4ks3-vn",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 136,
@@ -2400,7 +2952,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 74,
+        "block_id": 136,
+        "item_model": "xvr1b08-i/t-vn",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 137,
@@ -2468,7 +3030,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 56,
+        "block_id": 140,
+        "item_model": "nvr5232-ei",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 141,
@@ -2519,7 +3091,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 66,
+        "block_id": 143,
+        "item_model": "1339da-sw-pv",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 144,
@@ -2536,7 +3118,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 65,
+        "block_id": 144,
+        "item_model": "1339dtk1-sw-pv",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 145,
@@ -2689,7 +3281,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 39,
+        "block_id": 153,
+        "item_model": "a82pro",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 154,
@@ -2842,7 +3444,26 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 91,
+        "block_id": 162,
+        "item_model": "dh-ipc-hdw1239v-a-il-vn",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 92,
+        "block_id": 162,
+        "item_model": "dh-ipc-hdw1439v-a-il-vn",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 163,
@@ -2861,9 +3482,18 @@ export const blockList = [
     "updated_at": null,
     "items": [
       {
-        "id": 7,
+        "id": 25,
         "block_id": 163,
-        "item_model": "3hote",
+        "item_model": "pt1239h",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 26,
+        "block_id": 163,
+        "item_model": "pt1439h",
         "item_type": "text",
         "item_desc": null,
         "created_at": null,
@@ -2971,7 +3601,26 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 14,
+        "block_id": 169,
+        "item_model": "cpe710",
+        "item_type": "text",
+        "item_desc": "trên giá tầng 2",
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 72,
+        "block_id": 169,
+        "item_model": "eap211",
+        "item_type": "text",
+        "item_desc": "trên giá còn 1",
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 170,
@@ -3005,7 +3654,26 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 70,
+        "block_id": 171,
+        "item_model": "sx108",
+        "item_type": "text",
+        "item_desc": "nằm dưới mấy thùng đè lên nhau",
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 71,
+        "block_id": 171,
+        "item_model": "er605",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 172,
@@ -3039,7 +3707,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 54,
+        "block_id": 173,
+        "item_model": "sg1428pe",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 174,
@@ -3175,7 +3853,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 98,
+        "block_id": 181,
+        "item_model": "tl-wr820n",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 182,
@@ -3194,9 +3882,9 @@ export const blockList = [
     "updated_at": null,
     "items": [
       {
-        "id": 6,
+        "id": 90,
         "block_id": 182,
-        "item_model": "c50",
+        "item_model": "tl-mb115-4g",
         "item_type": "text",
         "item_desc": null,
         "created_at": null,
@@ -3236,7 +3924,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 84,
+        "block_id": 184,
+        "item_model": "tl-mr100",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 185,
@@ -3253,7 +3951,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 20,
+        "block_id": 185,
+        "item_model": "c32ep",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 186,
@@ -3327,8 +4035,8 @@ export const blockList = [
     "id": 190,
     "name": "841",
     "key": "block_1785682807644",
-    "x": 1163,
-    "y": 678,
+    "x": 1104.0549048316,
+    "y": 683.96273291925,
     "width": 97,
     "height": 36,
     "style": {
@@ -3344,8 +4052,8 @@ export const blockList = [
     "id": 191,
     "name": "842",
     "key": "block_1785682827794",
-    "x": 1099,
-    "y": 680,
+    "x": 1044.595442899,
+    "y": 683.57142857143,
     "width": 61,
     "height": 34,
     "style": {
@@ -3372,7 +4080,17 @@ export const blockList = [
     "type": "block",
     "created_at": null,
     "updated_at": null,
-    "items": []
+    "items": [
+      {
+        "id": 13,
+        "block_id": 192,
+        "item_model": "cpe510",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   },
   {
     "id": 193,
@@ -3390,5 +4108,140 @@ export const blockList = [
     "created_at": null,
     "updated_at": null,
     "items": []
+  },
+  {
+    "id": 194,
+    "name": "515",
+    "key": "block_1785724044882",
+    "x": 181.58331808199,
+    "y": 441.05590062112,
+    "width": 24.665583821376,
+    "height": 45.503105590062,
+    "style": {
+      "color": "#7296d4",
+      "zIndex": 194
+    },
+    "type": "block",
+    "created_at": null,
+    "updated_at": null,
+    "items": [
+      {
+        "id": 1,
+        "block_id": 194,
+        "item_model": "eap223",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 2,
+        "block_id": 194,
+        "item_model": "be400",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 3,
+        "block_id": 194,
+        "item_model": "tl-sg1008",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      },
+      {
+        "id": 69,
+        "block_id": 194,
+        "item_model": "sx105",
+        "item_type": "text",
+        "item_desc": "trên giá",
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
+  },
+  {
+    "id": 195,
+    "name": "524",
+    "key": "block_1785741041144",
+    "x": 166.85125366032,
+    "y": 519.76397515528,
+    "width": 28.065290995608,
+    "height": 40.732919254658,
+    "style": {
+      "color": "#7296d4",
+      "zIndex": 195
+    },
+    "type": "block",
+    "created_at": null,
+    "updated_at": null,
+    "items": [
+      {
+        "id": 15,
+        "block_id": 195,
+        "item_model": "cpe610",
+        "item_type": "text",
+        "item_desc": "thùng bên dưới phía ngoài",
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
+  },
+  {
+    "id": 196,
+    "name": "910",
+    "key": "block_1785895076316",
+    "x": 418.42958455344,
+    "y": 53.19375,
+    "width": 64.328834187408,
+    "height": 59.60625,
+    "style": {
+      "color": "#7296d4",
+      "zIndex": 196
+    },
+    "type": "block",
+    "created_at": null,
+    "updated_at": null,
+    "items": [
+      {
+        "id": 37,
+        "block_id": 196,
+        "item_model": "6vone",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
+  },
+  {
+    "id": 197,
+    "name": "739",
+    "key": "block_1786352995670",
+    "x": 1323.8849286237,
+    "y": 180.39375,
+    "width": 41.664119692533,
+    "height": 36.80625,
+    "style": {
+      "color": "#7296d4",
+      "zIndex": 197
+    },
+    "type": "block",
+    "created_at": null,
+    "updated_at": null,
+    "items": [
+      {
+        "id": 64,
+        "block_id": 197,
+        "item_model": "nvr4232-4ks3",
+        "item_type": "text",
+        "item_desc": null,
+        "created_at": null,
+        "updated_at": null
+      }
+    ]
   }
 ];

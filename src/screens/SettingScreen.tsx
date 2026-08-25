@@ -1,29 +1,12 @@
 import { Button } from '@react-navigation/elements';
-import React, { FunctionComponent, useCallback } from 'react';
-import { Linking, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { SceneMap } from 'react-native-tab-view';
+import { createAsyncStorage } from "@react-native-async-storage/async-storage";
+import { DATABASE_ENUM } from '../enum/database';
 
 const appUrl = 'https://play.google.com/store/apps/details?id=com.abac';
-
-const FirstRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
-);
-
-const SecondRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
-);
-
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-});
-
-const routes = [
-  { key: 'first', title: 'First' },
-  { key: 'second', title: 'Second' },
-];
+const storage = createAsyncStorage(DATABASE_ENUM.LOCAL_STORAGE);
 
 type OpenURLButtonProps = {
   url: string;
@@ -32,19 +15,22 @@ type OpenURLButtonProps = {
 
 export const SettingScreen: FunctionComponent<any> = () => {
   const navigation = useNavigation();
+  const [num, setNum] = useState<number>(0);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
 
-  const insets = useSafeAreaInsets();
-  const layout = useWindowDimensions();
-  const [index, setIndex] = React.useState(0);
+  const checkLogin = useCallback(async () => {
+    const _isLogin = await storage.getItem('isLogin');
+    setIsLogin(_isLogin === 'true');
+  }, [])
 
-  // return (
-  //   <TabView
-  //     navigationState={{ index, routes }}
-  //     renderScene={renderScene}
-  //     onIndexChange={setIndex}
-  //     initialLayout={{ width: layout.width }}
-  //   />
-  // );
+  const onLogin = useCallback(async () => {
+    if (num === 8) {
+      await storage.setItem('isLogin', 'true');
+      await checkLogin();
+      return;
+    }
+    setNum(num + 1);
+  }, [checkLogin, num]);
 
   const handlePress = useCallback(async (url: string) => {
     const activeUrl = await Linking.canOpenURL(url);
@@ -53,29 +39,52 @@ export const SettingScreen: FunctionComponent<any> = () => {
     }
   }, [])
 
+  useEffect(() => {
+    checkLogin();
+  }, [checkLogin]);
+
   return (
     <View style={{ flex: 1, padding: 4, paddingBottom: 50, rowGap: 5, justifyContent: 'space-between' }}>
       {/* <Button variant="filled" onPress={() => {
         navigation.navigate('DashboardPage');
       }}>Active history</Button> */}
 
-      <TouchableOpacity style={{
-        backgroundColor: '#8a6eccff',
-        padding: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 8,
-        // borderColor: '#c28832ff',
-        // borderWidth: 1,
-      }} onPress={() => {
-        navigation.navigate('StockPage');
+      <View style={{
+        gap: 5
       }}>
-        <Text style={{
-          fontWeight: 'bold',
-          color: 'white',
-          fontSize: 18
-        }}>Stock manage</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={{
+          backgroundColor: '#8a6eccff',
+          padding: 10,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 8,
+          // borderColor: '#c28832ff',
+          // borderWidth: 1,
+        }} onPress={() => {
+          navigation.navigate('StockPage');
+        }}>
+          <Text style={{
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize: 18
+          }}>Stock manage</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{
+          backgroundColor: '#8a6eccff',
+          padding: 10,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 8,
+          // borderColor: '#c28832ff',
+          // borderWidth: 1,
+        }} onLongPress={onLogin}>
+          <Text style={{
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize: 18
+          }}>{isLogin ? 'Xin chào' : 'Đăng nhập'}</Text>
+        </TouchableOpacity>
+      </View>
       <Button variant="filled" onPress={() => handlePress(appUrl)}>Cập nhật</Button>
     </View>
   )

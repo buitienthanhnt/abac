@@ -1,11 +1,19 @@
 import { FunctionComponent, useCallback, useEffect, useMemo, useState } from "react";
 import { Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, useWindowDimensions, View } from "react-native";
 import StockItem from "../components/stock/StockItem";
-import { getDatabase, ref, get } from '@react-native-firebase/database';
+import { getDatabase, ref, get, set } from '@react-native-firebase/database';
 import { BlockType } from "../types/Block";
 //list icons:  https://oblador.github.io/react-native-vector-icons/
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Orientation from 'react-native-orientation-locker';
+import ItemForm from "../components/stock/ItemForm";
+import { createAsyncStorage } from "@react-native-async-storage/async-storage";
+import { DATABASE_ENUM } from '../enum/database';
+
+const appUrl = 'https://play.google.com/store/apps/details?id=com.abac';
+const storage = createAsyncStorage(DATABASE_ENUM.LOCAL_STORAGE);
+
+const db = getDatabase();
 
 const StockScreen: FunctionComponent<any> = () => {
   const [blockList, setBlockList] = useState<BlockType[]>([]);
@@ -13,16 +21,37 @@ const StockScreen: FunctionComponent<any> = () => {
   const [screen, setScreen] = useState(null);
   const [forcus, setForcus] = useState<string>('');
   const [search, setSearch] = useState<string>('');
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+
+  const checkLogin = useCallback(async () => {
+    const _isLogin = await storage.getItem('isLogin');
+    setIsLogin(_isLogin === 'true');
+  }, [])
 
   const initBlockList = useCallback(() => {
-    const db = getDatabase();
     get(ref(db, '/blockList')).then(snapshot => {
       setBlockList(snapshot.val());
     });
   }, [])
 
+  const onAddItem = useCallback((block: BlockType, data: any) => {
+    const index = blockList.findIndex(item => item?.key === block.key);
+    const newItem = {
+      block_id: block.id,
+      item_model: data.model,
+      item_type: 'text',
+      item_desc: data.item_desc
+    };
+    set(ref(db, '/blockList/' + index + '/items'), [
+      ...(block?.items || []), newItem
+    ]).then(() => {
+      initBlockList();
+    });
+
+  }, [blockList, initBlockList]);
+
   const initScreen = useCallback(() => {
-    const db = getDatabase();
+
     get(ref(db, '/screen')).then(snapshot => {
       setScreen(snapshot.val());
     });
@@ -34,21 +63,23 @@ const StockScreen: FunctionComponent<any> = () => {
     }
 
     const result = blockList.filter(block =>
-      block.items?.some(item => item.item_model.toLowerCase().includes(search?.toLowerCase()))
+      block?.items?.some(item => item.item_model.toLowerCase().includes(search?.toLowerCase()))
     );
     return result.map(block => {
       return block.key;
     });
   }, [search, blockList])
 
-  const forcusBlock = blockList.length ? blockList.find(item => item.key === forcus) : null;
+  const forcusBlock = blockList.length ? blockList.find(item => item?.key === forcus) : null;
 
   useEffect(() => {
+    checkLogin();
     initBlockList();
     initScreen();
-  }, [initBlockList, initScreen])
+  }, [checkLogin, initBlockList, initScreen])
 
   useEffect(() => {
+    // return;
     // Khóa màn hình ngang khi mở ứng dụng/màn hình này
     Orientation.lockToLandscapeRight();
 
@@ -98,23 +129,27 @@ const StockScreen: FunctionComponent<any> = () => {
             <Ionicons name="close-circle" size={24} color="white" />
           </TouchableOpacity>
           {forcusBlock.items?.map((item, index) => {
+            if (!item) {
+              return null;
+            }
             return <View key={index}
               style={{
                 marginBottom: 2,
                 borderWidth: 1,
-                borderColor: 'black',
                 borderRadius: 4,
                 paddingHorizontal: 4,
                 paddingVertical: 2,
                 display: 'flex',
                 flexDirection: 'row',
                 gap: 5,
-                alignItems: 'baseline'
+                alignItems: 'baseline',
+                borderColor: 'white',
               }}>
               <Text style={{
                 color: 'white',
                 fontWeight: 'bold',
                 fontSize: 16,
+                textTransform: 'uppercase',
               }}>{item.item_model}</Text>
               {item.item_desc && <Text style={{ color: '#17d641ff', fontSize: 12, fontWeight: 'semibold' }} >{`(${item.item_desc})`}</Text>}
             </View>
@@ -127,7 +162,8 @@ const StockScreen: FunctionComponent<any> = () => {
             block={item}
             onFocus={setForcus}
             initScreen={screen}
-            selected={search.length < 3 ? 0 : searchResult.includes(item.key) ? 1 : 2} />
+            isFocus={forcus === item?.key}
+            selected={search.length < 3 ? 0 : searchResult.includes(item?.key) ? 1 : 2} />
         })}
         <View style={{
           position: 'absolute',
@@ -160,6 +196,9 @@ const StockScreen: FunctionComponent<any> = () => {
           >
           </TextInput>
         </View>
+        {forcusBlock && isLogin && <View style={{ position: 'absolute', top: 10, right: 60 }}>
+          <ItemForm block={forcusBlock} onAddItem={onAddItem} />
+        </View>}
       </View>
     </TouchableWithoutFeedback>
   );
