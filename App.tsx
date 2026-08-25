@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import SliverChartScreen from './src/screens/SliverChartScreen';
 import { createStaticNavigation, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
   createBottomTabNavigator,
   createBottomTabScreen,
@@ -67,6 +68,7 @@ const SettingStack = createNativeStackNavigator({
       options: {
         title: 'Kho',
         headerShown: false,
+        // tabBarStyle: { display: 'none' }, // chua chajy
       },
     },
   },
@@ -146,7 +148,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* <SafeAreaProvider> */}
-      <Navigation />
+      <GestureHandlerRootView>
+        <Navigation />
+      </GestureHandlerRootView>
       {/*<StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />*/}
       {/*<AppContent />*/}
       {/* </SafeAreaProvider> */}

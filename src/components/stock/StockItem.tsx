@@ -1,5 +1,6 @@
 import { TouchableOpacity, useWindowDimensions, } from 'react-native';
 import { BlockType, } from '../../types/Block';
+import { useCallback } from 'react';
 
 type Props = {
   block: BlockType;
@@ -11,6 +12,13 @@ type Props = {
 }
 const StockItem = ({ block, selected, onFocus, initScreen, isFocus = false }: Props) => {
   const { width, height } = useWindowDimensions();
+
+  const handleFocus = useCallback(() => {
+    if (block.type === 'area') {
+      return;
+    }
+    onFocus(block.key)
+  }, [])
 
   if (!initScreen || !block) {
     return null;
@@ -26,10 +34,10 @@ const StockItem = ({ block, selected, onFocus, initScreen, isFocus = false }: Pr
       top: block.y * yScale,
       width: block.width * xScale,
       height: block.height * yScale,
-      backgroundColor: isFocus ? 'black' : block.type === 'block' ? (selected === 1 ? '#76d5a9' : selected === 2 ? '#b6a5b5ff' : block?.style?.color) : undefined,
+      backgroundColor: isFocus ? '#fff' : block.type === 'block' ? (selected === 1 ? '#76d5a9' : selected === 2 ? '#b6a5b5ff' : block?.style?.color) : undefined,
       // borderWidth: block.type === 'area' ? 1 : 0,
     }}
-      onLongPress={() => onFocus(block.key)}
+      onLongPress={handleFocus}
     >
     </TouchableOpacity>
   )

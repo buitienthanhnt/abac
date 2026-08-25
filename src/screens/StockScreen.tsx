@@ -1,27 +1,67 @@
-import { FunctionComponent, useCallback, useEffect, useMemo, useState } from "react";
+import { FunctionComponent, useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, useWindowDimensions, View } from "react-native";
 import StockItem from "../components/stock/StockItem";
 import { getDatabase, ref, get, set } from '@react-native-firebase/database';
 import { BlockType } from "../types/Block";
-//list icons:  https://oblador.github.io/react-native-vector-icons/
+//list icons:  https://oblador.github.io/react-native-vector-icons/    Tìm: Ionicons
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Orientation from 'react-native-orientation-locker';
 import ItemForm from "../components/stock/ItemForm";
 import { createAsyncStorage } from "@react-native-async-storage/async-storage";
 import { DATABASE_ENUM } from '../enum/database';
+import { useNavigation } from "@react-navigation/native";
+import {
+  GestureDetector,
+  GestureHandlerRootView,
+  usePanGesture,
+} from 'react-native-gesture-handler';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 
 const appUrl = 'https://play.google.com/store/apps/details?id=com.abac';
 const storage = createAsyncStorage(DATABASE_ENUM.LOCAL_STORAGE);
 
 const db = getDatabase();
 
-const StockScreen: FunctionComponent<any> = () => {
+const StockScreen: FunctionComponent<any> = ({ }) => {
+  const navigation = useNavigation();
   const [blockList, setBlockList] = useState<BlockType[]>([]);
   const { width, height } = useWindowDimensions();
   const [screen, setScreen] = useState(null);
   const [forcus, setForcus] = useState<string>('');
   const [search, setSearch] = useState<string>('');
   const [isLogin, setIsLogin] = useState<boolean>(false);
+
+  const isPressed = useSharedValue(false);
+  const offset = useSharedValue({ x: 0, y: 0 });
+
+  const gesture = usePanGesture({
+    onBegin: () => {
+      isPressed.value = true;
+    },
+    onUpdate: (e) => {
+      offset.value = {
+        x: offset.value.x + e.changeX,
+        y: offset.value.y + e.changeY,
+      };
+    },
+    onFinalize: () => {
+      isPressed.value = false;
+    },
+  });
+
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { translateX: offset.value.x },
+        { translateY: offset.value.y },
+        { scale: withSpring(isPressed.value ? 1.2 : 1) },
+      ],
+    };
+  }, []);
 
   const checkLogin = useCallback(async () => {
     const _isLogin = await storage.getItem('isLogin');
@@ -77,6 +117,21 @@ const StockScreen: FunctionComponent<any> = () => {
     initBlockList();
     initScreen();
   }, [checkLogin, initBlockList, initScreen])
+
+  useLayoutEffect(() => {
+    // Tìm Stack cha (chính là Tab Navigator) và ẩn style đi
+    if (!navigation) {
+      return;
+    }
+    navigation.getParent()?.setOptions({
+      tabBarStyle: { display: 'none' }
+    });
+
+    // Khi rời khỏi màn hình này, hiển thị lại Tab bar bằng cách khôi phục 'flex'
+    return () => navigation.getParent()?.setOptions({
+      tabBarStyle: { display: 'flex' }
+    });
+  }, [navigation]);
 
   useEffect(() => {
     // return;
@@ -165,20 +220,24 @@ const StockScreen: FunctionComponent<any> = () => {
             isFocus={forcus === item?.key}
             selected={search.length < 3 ? 0 : searchResult.includes(item?.key) ? 1 : 2} />
         })}
-        <View style={{
+        <Animated.View style={[{
           position: 'absolute',
           bottom: 40,
-          right: 30,
-          width: 170,
+          left: 30,
+          // width: 170,
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          gap: 5,
-        }}>
-          {(search.length > 2) && <TouchableOpacity onPress={() => setSearch('')}>
-            <Ionicons name="close-circle" size={24} color="white" />
+          gap: 8,
+        }, animatedStyles]} >
+          <TouchableOpacity onPress={() => navigation.goBack()} style={{
+            borderWidth: 1,
+            borderRadius: '100%',
+            borderColor: '#fff',
+            padding: 4,
+          }}>
+            <Ionicons name="arrow-back" size={24} color="white"></Ionicons>
           </TouchableOpacity>
-          }
           <TextInput
             value={search}
             onChangeText={(value) => setSearch(value)}
@@ -189,13 +248,20 @@ const StockScreen: FunctionComponent<any> = () => {
               borderRadius: 8,
               color: '#fff',
               fontWeight: 'semibold',
-              fontSize: 16,
+              fontSize: 14,
               width: 132,
               borderColor: '#fff',
             }}
           >
           </TextInput>
-        </View>
+          {(search.length > 2) && <TouchableOpacity onPress={() => setSearch('')}>
+            <Ionicons name="close-circle" size={24} color="white" />
+          </TouchableOpacity>
+          }
+          <GestureDetector gesture={gesture}>
+            <Ionicons name="move-sharp" size={28} color="white"></Ionicons>
+          </GestureDetector>
+        </Animated.View>
         {forcusBlock && isLogin && <View style={{ position: 'absolute', top: 10, right: 60 }}>
           <ItemForm block={forcusBlock} onAddItem={onAddItem} />
         </View>}
