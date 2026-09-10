@@ -40,7 +40,7 @@ const SliverChartScreen = () => {
     };
   }, [onDayData])
 
-  return <SafeAreaView style={{ flex: 1 }}>
+  return <SafeAreaView style={{ flex: 1, paddingVertical: 5 }}>
     <View style={styles.viewType}>
       <TouchableOpacity style={[btnStyle(type, 'L')]} onPress={() => setType('L')}>
         <Text style={styles.btnTitle}>L</Text>

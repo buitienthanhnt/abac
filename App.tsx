@@ -5,10 +5,10 @@
  * @format
  */
 
-import { StyleSheet, useColorScheme, View } from 'react-native';
+import { StatusBar, StyleSheet, useColorScheme } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import SliverChartScreen from './src/screens/SliverChartScreen';
-import { createStaticNavigation, useNavigation } from '@react-navigation/native';
+import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
@@ -21,26 +21,12 @@ import SettingScreen from './src/screens/SettingScreen';
 import DashboardScreen from './src/screens/DashboardScreen';
 import ActivityDetailScreen from './src/screens/ActivityDetailScreen';
 import StockScreen from './src/screens/StockScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import BankConfigScreen from './src/screens/BankConfigScreen';
+import LodeScreen from './src/screens/LodeScreen';
+import BankQrScreen from './src/screens/BankQrScreen';
 
 const queryClient = new QueryClient();
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#7ca6d6ff' }}>
-      {/* <Button onPress={() => navigation.navigate('App')}>
-        Go to Sliver chart
-      </Button> */}
-    </View>
-  );
-}
-
-function AppContent() {
-  const navigation = useNavigation();
-
-  return (<SliverChartScreen />);
-}
 
 const SettingStack = createNativeStackNavigator({
   initialRouteName: 'SettingPage',
@@ -71,17 +57,55 @@ const SettingStack = createNativeStackNavigator({
         // tabBarStyle: { display: 'none' }, // chua chajy
       },
     },
+    LodePage: {
+      screen: LodeScreen,
+      options: {
+        title: 'Xổ số miền bắc',
+      }
+    },
+  },
+});
+
+const HomeStack = createNativeStackNavigator({
+  initialRouteName: 'HomePage',
+  screens: {
+    HomePage: {
+      screen: HomeScreen,
+      options: {
+        title: 'Trang chủ'
+      }
+    },
+    BankConfigPage: {
+      screen: BankConfigScreen,
+      options: {
+        title: 'Cấu hình ngân hàng'
+      }
+    },
+    BankQrPage: {
+      screen: BankQrScreen,
+      options: {
+        title: 'Chi tiết QR'
+      }
+    }
+  },
+  screenOptions: {
+    // headerShown: false, // 👈 Thêm dòng này để ẩn header của TẤT CẢ các màn hình trong Stack này
   },
 });
 
 const MyTabs = createBottomTabNavigator({
-  initialRouteName: 'App',
+  initialRouteName: 'Home',
   screens: {
     Home: createBottomTabScreen({
-      screen: HomeScreen,
+      screen: HomeStack,
       options: {
-        title: 'Trang chủ',
+        // title: 'Trang chủ',
         headerTransparent: true,
+        headerShown: false,
+        headerShadowVisible: false,
+        headerStyle: {
+          backgroundColor: 'transparent',
+        },
       }
     }),
     App: createBottomTabScreen({
@@ -135,6 +159,7 @@ const MyTabs = createBottomTabNavigator({
       tabBarActiveTintColor: '#1E90FF',   // Màu icon khi đang chọn
       tabBarInactiveTintColor: 'black',    // Màu icon khi không chọn
       tabBarShowLabel: false,
+      headerShown: false,
     }
   }
 });
@@ -148,11 +173,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* <SafeAreaProvider> */}
+      {/* Sửa lỗi khoảng trắng xuất hiện trùng lặp trên tiêu đề (nó là của stack header) chỉ bị với tab đầu tiên khi mở app */}
+      <StatusBar translucent={true} backgroundColor="transparent" barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <GestureHandlerRootView>
         <Navigation />
       </GestureHandlerRootView>
-      {/*<StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />*/}
-      {/*<AppContent />*/}
       {/* </SafeAreaProvider> */}
     </QueryClientProvider>
   );

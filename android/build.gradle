@@ -10,12 +10,39 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+				// Thêm đoạn block này để tự động bỏ qua jcenter khi các thư viện bên thứ 3 gọi tới(fix error: react-native-text-recognition  )
+        // all { ArtifactRepository repository ->
+        //     if (repository instanceof MavenArtifactRepository && repository.url.toString().contains("jcenter")) {
+        //         project.logger.warn("Repository ${repository.url} removed and replaced with mavenCentral()")
+        //         remove(repository)
+        //     }
+        // }
     }
     dependencies {
         classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
         classpath 'com.google.gms:google-services:4.5.0'
+    }
+}
+
+// Dán trực tiếp đoạn này xuống cuối file android/build.gradle của bạn
+// fix error: react-native-text-recognition when run build sdk version
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty("android")) {
+            android {
+                // Ép tất cả các thư viện (bao gồm react-native-text-recognition) dùng chung SDK 36
+                compileSdkVersion 36
+                buildToolsVersion "36.0.0"
+
+                // Khắc phục thêm các lỗi liên quan đến bất đồng bộ phiên bản Java biên dịch
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_17
+                    targetCompatibility JavaVersion.VERSION_17
+                }
+            }
+        }
     }
 }
 

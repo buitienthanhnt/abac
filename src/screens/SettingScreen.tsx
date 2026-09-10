@@ -8,11 +8,6 @@ import { DATABASE_ENUM } from '../enum/database';
 const appUrl = 'https://play.google.com/store/apps/details?id=com.abac';
 const storage = createAsyncStorage(DATABASE_ENUM.LOCAL_STORAGE);
 
-type OpenURLButtonProps = {
-  url: string;
-  children: string;
-};
-
 export const SettingScreen: FunctionComponent<any> = () => {
   const navigation = useNavigation();
   const [num, setNum] = useState<number>(0);
@@ -49,40 +44,19 @@ export const SettingScreen: FunctionComponent<any> = () => {
         navigation.navigate('DashboardPage');
       }}>Active history</Button> */}
 
-      <View style={{
-        gap: 5
-      }}>
-        <TouchableOpacity style={{
-          backgroundColor: '#8a6eccff',
-          padding: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 8,
-          // borderColor: '#c28832ff',
-          // borderWidth: 1,
-        }} onPress={() => {
+      <View style={styles.contentView}>
+        <TouchableOpacity style={styles.navigateBtn} onPress={() => {
           navigation.navigate('StockPage');
         }}>
-          <Text style={{
-            fontWeight: 'bold',
-            color: 'white',
-            fontSize: 18
-          }}>Stock manage</Text>
+          <Text style={styles.navigateBtnLabel}>Dss kho</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{
-          backgroundColor: '#8a6eccff',
-          padding: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 8,
-          // borderColor: '#c28832ff',
-          // borderWidth: 1,
-        }} onLongPress={onLogin}>
-          <Text style={{
-            fontWeight: 'bold',
-            color: 'white',
-            fontSize: 18
-          }}>{isLogin ? 'Xin chào' : 'Đăng nhập'}</Text>
+        <TouchableOpacity style={styles.navigateBtn} onPress={() => {
+          navigation.navigate('LodePage');
+        }}>
+          <Text style={styles.navigateBtnLabel}>Xổ số miền bắc</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navigateBtn} onLongPress={onLogin}>
+          <Text style={styles.authLabel}>{isLogin ? 'Xin chào' : 'Đăng nhập'}</Text>
         </TouchableOpacity>
       </View>
       <Button variant="filled" onPress={() => handlePress(appUrl)}>Cập nhật</Button>
@@ -93,6 +67,9 @@ export const SettingScreen: FunctionComponent<any> = () => {
 export default SettingScreen;
 
 const styles = StyleSheet.create({
+  contentView: {
+    gap: 5
+  },
   pagerView: {
     flex: 1,
     // backgroundColor: '#3288c2ff',
@@ -104,5 +81,24 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     flex: 1,
     backgroundColor: '#37c232ff',
+  },
+  navigateBtn: {
+    backgroundColor: '#8a6eccff',
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+    // borderColor: '#c28832ff',
+    // borderWidth: 1,
+  },
+  navigateBtnLabel: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 18
+  },
+  authLabel: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 18
   },
 });

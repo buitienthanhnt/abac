@@ -18,7 +18,7 @@ const StockItem = ({ block, selected, onFocus, initScreen, isFocus = false }: Pr
       return;
     }
     onFocus(block.key)
-  }, [])
+  }, [block.key, block.type, onFocus])
 
   if (!initScreen || !block) {
     return null;
@@ -34,7 +34,7 @@ const StockItem = ({ block, selected, onFocus, initScreen, isFocus = false }: Pr
       top: block.y * yScale,
       width: block.width * xScale,
       height: block.height * yScale,
-      backgroundColor: isFocus ? '#fff' : block.type === 'block' ? (selected === 1 ? '#76d5a9' : selected === 2 ? '#b6a5b5ff' : block?.style?.color) : undefined,
+      backgroundColor: isFocus ? 'black' : block.type === 'block' ? (selected === 1 ? '#76d5a9' : selected === 2 ? '#857683ff' : block?.style?.color) : undefined,
       // borderWidth: block.type === 'area' ? 1 : 0,
     }}
       onLongPress={handleFocus}

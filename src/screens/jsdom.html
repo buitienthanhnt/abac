@@ -1,0 +1,96 @@
+Để lấy toàn bộ thẻ <div class="content"> và giữ nguyên tất cả các thẻ con bên trong nó 
+(thay vì chỉ lấy ruột hoặc text), bạn có thể dùng một trong hai cách dưới đây:
+Cách 1: Sử dụng DOMParser (Nhẹ nhất, dùng JS thuần, khuyên dùng)
+Cách này dùng outerHTML để lấy chính nó và toàn bộ cấu trúc bên trong, 
+sau đó đưa vào dangerouslySetInnerHTML để 
+render.jsx
+
+import React, { useEffect, useState } from 'react';
+
+const ExtractComponent = () => {
+  const [contentHtml, setContentHtml] = useState('');
+
+  const htmlString = `
+    <div class="wrapper">
+      <h1>Tiêu đề chính</h1>
+      <div class="content" id="main-content">
+        <p>Đây là dòng chữ có <strong>in đậm</strong>.</p>
+        <ul>
+          <li>Danh sách con 1</li>
+          <li>Danh sách con 2</li>
+        </ul>
+      </div>
+      <p>Thẻ thừa bên ngoài</p>
+    </div>
+  `;
+
+  useEffect(() => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, 'text/html');
+    const contentDiv = doc.querySelector('.content');
+
+    if (contentDiv) {
+      // outerHTML sẽ lấy toàn bộ thẻ <div class="content">...</div> bao gồm cả thẻ con
+      setContentHtml(contentDiv.outerHTML); 
+    }
+  }, [htmlString]);
+
+  return (
+    <div>
+      <h3>Kết quả giữ nguyên toàn bộ thẻ và thẻ con:</h3>
+      {/* Render chuỗi HTML thu được ra giao diện */}
+      <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+    </div>
+  );
+};
+
+export default ExtractComponent;
+Hãy thận trọng khi sử dụng mã.
+
+Cách 2: Sử dụng thư viện html-react-parser
+Nếu dự án của bạn đã cài sẵn html-react-parser và 
+bạn muốn chuyển đổi trực tiếp thành các React Element thật (giữ nguyên thuộc tính của thẻ cha và các thẻ con).
+jsx
+
+import React from 'react';
+import parse, { domToReact } from 'html-react-parser';
+
+const ExtractComponent = () => {
+  const htmlString = `
+    <div>
+      <div class="content" style="color: blue;">
+        <p>Thẻ con 1 <span>chứa text</span></p>
+        <button>Nút bấm con 2</button>
+      </div>
+    </div>
+  `;
+
+  let matchedElement = null;
+
+  parse(htmlString, {
+    replace: (domNode) => {
+      // Tìm thẻ div có class là content
+      if (domNode.attribs && domNode.attribs.class === 'content') {
+        // Trả về chính domNode đó để chuyển đổi thành React Element hoàn chỉnh
+        matchedElement = domToReact([domNode]); 
+      }
+    }
+  });
+
+  return (
+    <div>
+      {matchedElement ? matchedElement : <p>Không tìm thấy thẻ</p>}
+    </div>
+  );
+};
+
+export default ExtractComponent;
+
+
+Hãy thận trọng khi sử dụng mã.Điểm khác biệt mấu chốt:
+Ở cách 1, contentDiv.outerHTML
+ sẽ trích xuất ra chính xác chuỗi: 
+ <div class="content" id="main-content">...các thẻ con...</div>.
+ Hãy ưu tiên Cách 1 nếu bạn chỉ cần trích xuất nhanh chuỗi HTML này, 
+ và ưu tiên Cách 2 nếu bạn muốn kết quả trả về là một React Component có thể tương tác được 
+ (ví dụ click vào <button> con bên trong).
