@@ -15,7 +15,7 @@ const BankQrScreen = ({ route }) => {
   }, [amount, value?.bank, des, value?.acc])
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput style={styles.inputStyle} placeholder="Số tiền chuyển khoản" onChangeText={(val) => setAmount(Number(val))} value={amount?.toString()} keyboardType="number-pad" />
         <TextInput style={styles.inputStyle} placeholder="Nội dung thanh toán" onChangeText={(val) => setDes(val)} value={des} />
@@ -37,7 +37,7 @@ const BankQrScreen = ({ route }) => {
           <Ionicons name="copy" size={36} color="#2f2f3dff" />
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 

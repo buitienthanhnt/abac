@@ -122,9 +122,9 @@ export default BankConfigScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#7ca6d6ff',
+    backgroundColor: '#907dd4ff',
     padding: 10,
-    paddingTop: 32,
+    paddingTop: 16,
     gap: 10
   },
   inputStyle: {

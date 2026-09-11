@@ -1,15 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
-import { FlatList, Image, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from "react-native";
+import { FlatList, Image, Pressable, StyleSheet, TextInput, TouchableOpacity, useWindowDimensions, View } from "react-native";
 // @ts-ignore
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import useLocalStorage from "../hook/useLocalStorage";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 // image bank avatar:  https://qr.sepay.vn/assets/img/banklogo/VCB.png?v=20260603220157
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const tabBarHeight = useBottomTabBarHeight();
   const [value, saveData, getData] = useLocalStorage('bankConfig', true);
   const [amount, setAmount] = useState<number>(0);
   const [des, setDes] = useState('Đồng ý thanh toán');
@@ -40,7 +41,7 @@ const HomeScreen = () => {
   })
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput style={styles.inputStyle} placeholder="Số tiền chuyển khoản" onChangeText={(val) => setAmount(Number(val))} value={amount.toString()} keyboardType="number-pad" />
         <TextInput style={styles.inputStyle} placeholder="Nội dung thanh toán" onChangeText={(val) => setDes(val)} value={des} />
@@ -50,7 +51,7 @@ const HomeScreen = () => {
       }}>
         <FlatList contentContainerStyle={{
           rowGap: 8,
-          paddingBottom: 20
+          paddingBottom: tabBarHeight,
         }}
           columnWrapperStyle={{
             gap: 8
@@ -68,8 +69,7 @@ const HomeScreen = () => {
           line
         />
       </View>
-      {/* {value && value.map((item, index) => <QrItem key={index.toString()} amount={amount} des={des} value={item} />)} */}
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -78,9 +78,9 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#7ca6d6ff',
+    backgroundColor: '#8e7ccfff',
     padding: 5,
-    // paddingTop: 10,
+    paddingBottom: 0,
     gap: 10
   },
   inputStyle: {
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: '100%',
-    gap: 20
+    gap: 20,
   }
 })
 

@@ -3,6 +3,7 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from 'reac
 import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { createAsyncStorage } from "@react-native-async-storage/async-storage";
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { DATABASE_ENUM } from '../enum/database';
 
 const appUrl = 'https://play.google.com/store/apps/details?id=com.abac';
@@ -10,6 +11,7 @@ const storage = createAsyncStorage(DATABASE_ENUM.LOCAL_STORAGE);
 
 export const SettingScreen: FunctionComponent<any> = () => {
   const navigation = useNavigation();
+  const tabBarHeight = useBottomTabBarHeight();
   const [num, setNum] = useState<number>(0);
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
@@ -39,7 +41,7 @@ export const SettingScreen: FunctionComponent<any> = () => {
   }, [checkLogin]);
 
   return (
-    <View style={{ flex: 1, padding: 4, paddingBottom: 50, rowGap: 5, justifyContent: 'space-between' }}>
+    <View style={{ flex: 1, padding: 4, paddingBottom: tabBarHeight, rowGap: 5, justifyContent: 'space-between' }}>
       {/* <Button variant="filled" onPress={() => {
         navigation.navigate('DashboardPage');
       }}>Active history</Button> */}

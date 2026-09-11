@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
-import { Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, useWindowDimensions, View } from "react-native";
+import { Keyboard, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, useColorScheme, useWindowDimensions, View } from "react-native";
 import StockItem from "../components/stock/StockItem";
 import { getDatabase, ref, get, set } from '@react-native-firebase/database';
 import { BlockType, ItemType } from "../types/Block";
@@ -24,6 +24,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import TextRecognition from 'react-native-text-recognition';
 import { launchImageLibrary } from "react-native-image-picker";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // const appUrl = 'https://play.google.com/store/apps/details?id=com.abac';
 const storage = createAsyncStorage(DATABASE_ENUM.LOCAL_STORAGE);
@@ -31,9 +32,11 @@ const db = getDatabase();
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 
 const StockScreen: FunctionComponent<any> = () => {
+  const isDarkMode = useColorScheme() === 'dark';
+   const { width, height } = useWindowDimensions();
+
   const navigation = useNavigation();
   const [blockList, setBlockList] = useState<BlockType[]>([]);
-  const { width, height } = useWindowDimensions();
   const [screen, setScreen] = useState(null);
   const [forcus, setForcus] = useState<string>('');
   const [search, setSearch] = useState<string>('');
@@ -120,7 +123,7 @@ const StockScreen: FunctionComponent<any> = () => {
 
     const searchArr = search.split(' ');
     const result = blockList.filter(block =>
-      block?.items?.some(item => !!item && searchArr.filter((word) => word.length > 2).some(search => item.item_model.toLowerCase().includes(search?.toLowerCase()) || search?.toLowerCase().includes(item.item_model.toLowerCase())))
+      block?.items?.some(item => !!item && searchArr.filter((word) => word.length > 2).some(search => item?.item_model.toLowerCase().includes(search?.toLowerCase()) || search?.toLowerCase().includes(item?.item_model.toLowerCase())))
     );
     return result.map(block => {
       return block.key;
@@ -175,73 +178,76 @@ const StockScreen: FunctionComponent<any> = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={{ width: width, height: height, backgroundColor: '#413b4dff', }}>
-        {forcusBlock && <View style={styles.animatedBtn}>
-          <TouchableOpacity onPress={() => setForcus('')} style={styles.clearForcus}>
-            <Text style={styles.blockFocusTitle}>Vị trí đang chọn: {forcusBlock.name}</Text>
-            <Ionicons name="close-circle" size={24} color="white" />
-          </TouchableOpacity>
-          {sortValueTop(forcusBlock?.items || [], search)?.map((item, index) => {
-            if (!item) {
-              return null;
-            }
-            return <View key={index}
-              style={styles.itemContainer}>
-              <Text style={styles.itemModel}>{item.item_model}</Text>
-              {item.item_desc && <Text style={styles.itemDesc} >{`(${item.item_desc})`}</Text>}
-            </View>
-          })}
-        </View>
-        }
-        {blockList.length > 0 && blockList.map((item, index) => {
-          return <StockItem
-            key={index}
-            block={item}
-            onFocus={setForcus}
-            initScreen={screen}
-            isFocus={forcus === item?.key}
-            selected={search.length < 3 ? 0 : searchResult.includes(item?.key) ? 1 : 2} />
-        })}
-        <Animated.View style={[styles.funContainer, animatedStyles]} >
-          {isShowBtn && <AnimatedTouchableOpacity
-            entering={FadeIn.duration(600)}
-            exiting={FadeOut.duration(300)}
-            onPress={() => navigation.goBack()}
-            style={styles.animatedTouchable}>
-            <Ionicons name="arrow-back" size={24} color="white" />
-          </AnimatedTouchableOpacity>}
-          {isShowBtn && <AnimatedTouchableOpacity
-            onPress={onSelectImage}
-            entering={FadeIn.duration(300)}
-            exiting={FadeOut.duration(600)}
-            style={styles.animatedTouchable}>
-            <Ionicons name="images" size={24} color="white" />
-          </AnimatedTouchableOpacity>}
-          <TextInput
-            value={search}
-            onChangeText={(value) => setSearch(value)}
-            placeholder="tìm kiếm"
-            placeholderTextColor={'white'}
-            style={styles.textSearch}
-          />
-          {(search.length > 2) && <TouchableOpacity onPress={() => setSearch('')}>
-            <Ionicons name="close-circle" size={24} color="white" />
-          </TouchableOpacity>
-          }
-          <GestureDetector gesture={gesture}>
-            <TouchableOpacity style={styles.fingerBtn} onPress={() => {
-              setIsShowBtn(!isShowBtn)
-            }}>
-              <Ionicons name="finger-print-sharp" size={24} color="white" />
+    <SafeAreaView>
+      <StatusBar translucent={true} backgroundColor="#413b4dff" barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{ width: width, height: height, backgroundColor: '#413b4dff', }}>
+          {forcusBlock && <View style={styles.animatedBtn}>
+            <TouchableOpacity onPress={() => setForcus('')} style={styles.clearForcus}>
+              <Text style={styles.blockFocusTitle}>Vị trí đang chọn: {forcusBlock.name}</Text>
+              <Ionicons name="close-circle" size={24} color="white" />
             </TouchableOpacity>
-          </GestureDetector>
-        </Animated.View>
-        {forcusBlock && isLogin && <View style={styles.blockForm}>
-          <ItemForm block={forcusBlock} onAddItem={onAddItem} />
-        </View>}
-      </View>
-    </TouchableWithoutFeedback>
+            {sortValueTop(forcusBlock?.items || [], search)?.map((item, index) => {
+              if (!item) {
+                return null;
+              }
+              return <View key={index}
+                style={styles.itemContainer}>
+                <Text style={styles.itemModel}>{item?.item_model}</Text>
+                {item.item_desc && <Text style={styles.itemDesc} >{`(${item.item_desc})`}</Text>}
+              </View>
+            })}
+          </View>
+          }
+          {blockList.length > 0 && blockList.map((item, index) => {
+            return <StockItem
+              key={index}
+              block={item}
+              onFocus={setForcus}
+              initScreen={screen}
+              isFocus={forcus === item?.key}
+              selected={search.length < 3 ? 0 : searchResult.includes(item?.key) ? 1 : 2} />
+          })}
+          <Animated.View style={[styles.funContainer, animatedStyles]} >
+            {isShowBtn && <AnimatedTouchableOpacity
+              entering={FadeIn.duration(600)}
+              exiting={FadeOut.duration(300)}
+              onPress={() => navigation.goBack()}
+              style={styles.animatedTouchable}>
+              <Ionicons name="arrow-back" size={24} color="white" />
+            </AnimatedTouchableOpacity>}
+            {isShowBtn && <AnimatedTouchableOpacity
+              onPress={onSelectImage}
+              entering={FadeIn.duration(300)}
+              exiting={FadeOut.duration(600)}
+              style={styles.animatedTouchable}>
+              <Ionicons name="images" size={24} color="white" />
+            </AnimatedTouchableOpacity>}
+            <TextInput
+              value={search}
+              onChangeText={(value) => setSearch(value)}
+              placeholder="tìm kiếm"
+              placeholderTextColor={'white'}
+              style={styles.textSearch}
+            />
+            {(search.length > 2) && <TouchableOpacity onPress={() => setSearch('')}>
+              <Ionicons name="close-circle" size={24} color="white" />
+            </TouchableOpacity>
+            }
+            <GestureDetector gesture={gesture}>
+              <TouchableOpacity style={styles.fingerBtn} onPress={() => {
+                setIsShowBtn(!isShowBtn)
+              }}>
+                <Ionicons name="finger-print-sharp" size={24} color="white" />
+              </TouchableOpacity>
+            </GestureDetector>
+          </Animated.View>
+          {forcusBlock && isLogin && <View style={styles.blockForm}>
+            <ItemForm block={forcusBlock} onAddItem={onAddItem} />
+          </View>}
+        </View>
+      </TouchableWithoutFeedback>
+    </SafeAreaView>
   );
 }
 
@@ -250,8 +256,8 @@ export default StockScreen;
 const sortValueTop = (items: ItemType[], keyword: string) => {
 
   return [...(items || [])].sort((a, b) => {
-    const cleanA = a.item_model.toLowerCase();
-    const cleanB = b.item_model.toLowerCase();
+    const cleanA = a?.item_model.toLowerCase();
+    const cleanB = b?.item_model.toLowerCase();
     const keys: string[] = keyword.toLowerCase().split(' ').filter(key => key.length > 2);
 
     // Kiểm tra xem chuỗi có bắt đầu bằng từ khóa hay không (true/false)
@@ -262,7 +268,7 @@ const sortValueTop = (items: ItemType[], keyword: string) => {
     if (!startsA && startsB) return 1;  // b lên đầu
 
     // Nếu cả hai cùng bắt đầu hoặc cùng không bắt đầu, xếp theo bảng chữ cái mặc định
-    return cleanA.localeCompare(cleanB);
+    return cleanA?.localeCompare(cleanB);
   });
 }
 
